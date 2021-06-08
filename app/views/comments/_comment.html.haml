@@ -6,6 +6,11 @@
   = comment.body
 
 %p
+  %strong Comment Ratings:
+  #{comment.ratings.sum(:rateable_value)} (+#{comment.ratings.upvotes.count}) (-#{comment.ratings.downvotes.count})
+  = link_to '+1', rate_article_comment_path(comment, :article_id => @article.id, :value => '1'), method: :post
+  = link_to '-1', rate_article_comment_path(comment, :article_id => @article.id, :value => '-1'), method: :post
+%p
   = link_to 'Destroy Comment', [comment.article, comment],
     method: :delete,
     data: { confirm: 'Are you sure?' }
