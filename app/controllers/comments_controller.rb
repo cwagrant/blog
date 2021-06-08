@@ -21,6 +21,14 @@ class CommentsController < ApplicationController
     redirect_to article_path(@article)
   end
 
+  def rate
+    @article = Article.find(params[:article_id])
+    @comment = @article.comments.find(params[:id])
+    @comment.ratings.create(rateable_value: params[:value])
+
+    redirect_to @article #action: "show", id: params[:article_id]
+  end
+
 private
 
   def comment_params

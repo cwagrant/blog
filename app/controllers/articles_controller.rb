@@ -46,6 +46,13 @@ class ArticlesController < ApplicationController
     redirect_to articles_path
   end
 
+  def rate
+    @article = Article.find(params[:id])
+    @article.ratings.create(rateable_value: params[:value])
+
+    redirect_to action: "show", id: params[:id]
+  end
+
 private
 
   def article_params

@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
 
   resources :articles do
-    resources :comments
+    member do
+      post 'rate'
+    end
+    resources :comments do
+      member do
+        post 'rate'
+      end
+    end
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
